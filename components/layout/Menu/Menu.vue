@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import {MENU_DATA} from "@/components/layout/Menu/menu.data";
+import {MENU_DATA} from "@/components/layout/Menu/menu.data"
 
+const isCurrentPath = computed(() => {
+  return useRoute().path
+})
 </script>
 
 <template>
@@ -10,6 +13,7 @@ import {MENU_DATA} from "@/components/layout/Menu/menu.data";
         v-for="item in MENU_DATA"
         :key="item.name"
         :to="item.url"
+        :class="{'text-primary': isCurrentPath === item.url}"
     >
       <Icon :name="item.icon" class="mr-3" size="30"/>
       <span>{{ item.name }}</span>

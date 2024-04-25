@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     ],
     'nuxt-icon',
     '@pinia/nuxt',
+    'nuxt-time',
   ],
   shadcn: {
     prefix: 'Ui',
