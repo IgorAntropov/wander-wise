@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {useAuthStore} from "@/store/auth.store"
 import {useLoadingStore} from "@/store/loader.store"
+import {account} from "@/utils/appwrite"
 
 const isLoadingStore = useLoadingStore()
 const isAuthStore = useAuthStore()
@@ -8,7 +9,11 @@ const isRouter = useRouter()
 
 onMounted(async () => {
   try {
+    const user = await account.get()
 
+    if (user) {
+      isAuthStore.set(user)
+    }
   } catch (error) {
     await isRouter.push('/login')
   } finally {

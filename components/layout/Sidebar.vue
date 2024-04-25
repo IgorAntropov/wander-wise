@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import {useAuthStore} from "~/store/auth.store"
+import {useAuthStore} from "@/store/auth.store"
 import {useLoadingStore} from "@/store/loader.store"
+import {account} from "@/utils/appwrite"
 
 const isLoadingStore = useLoadingStore()
 const isAuthStore = useAuthStore()
@@ -8,6 +9,9 @@ const isRouter = useRouter()
 
 const logout = async () => {
   isLoadingStore.set(true)
+
+  await account.deleteSession('current')
+
   isAuthStore.clear()
 
   await isRouter.push('/login')
